@@ -97,10 +97,6 @@
       }
     }
 
-    .nav-list-link {
-      color: $nav-list-item-color;
-    }
-
     > .nav-list {
       display: none;
       padding-left: $sp-3;
@@ -108,6 +104,7 @@
 
       .nav-list-item {
         position: relative;
+        color: $nav-list-item-color;
 
         .nav-list-link {
           color: $nav-child-link-color;
