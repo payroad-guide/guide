@@ -14,7 +14,7 @@ permalink: /
 ---
 
 ### ■連動フロー
-
+＜図の「?」アイコンをクリックし、情報確認が可能＞
 <img src="{{ site.baseurl }}/assets/images/link_flow.png" id="image_screen" width="90%">
 
 1. FROMの基本構造
@@ -205,16 +205,16 @@ LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクト
       var $img = $("#image_screen").imgNotes2( {
               onReady: function() {
                 var notes = [	
-                        {x: "0.737", y:"0.042", note: '\
+                        {x: "0.737", y:"0.045", note: '\
                         <a href="#-link型form要求">サンプル確認</a> '
                         },
-                        {x: "0.737", y:"0.112", note: '\
+                        {x: "0.737", y:"0.115", note: '\
                         <a href="#-link型form返却">サンプル確認</a> '
                         },
                         {x: "0.700", y:"0.655", note: '\
                         <a href="#-決済結果">サンプル確認</a> '
                         },
-                        {x: "0.212", y:"0.797", note: '\
+                        {x: "0.215", y:"0.793", note: '\
                         <a href="#-リダイレクト">サンプル確認</a> '
                         },
                         ];
