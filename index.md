@@ -8,14 +8,14 @@ permalink: /
 
 # LINK型(画面)の連動ガイド
 
-リンク型は、決済代行会社がご提供する決済画面を呼び出して、決済処理をする接続方式です。
+リンク型は、決済代行会社がご提供する決済画面を呼び出して、決済処理をする接続方式です。<br>
 加盟店さまが決済画面を構築することなく、簡単かつスピーディーにご導入いただけます。
 
 ---
 
 ### ■連動フロー
 
-<img src="{{ site.baseurl }}/assets/images/link_flow.png" id="image_screen">
+<img src="{{ site.baseurl }}/assets/images/link_flow.png" id="image_screen" width="90%">
 
 1. FROMの基本構造
 
@@ -33,16 +33,17 @@ permalink: /
   <li><small>FORMタグのaction属性に指定する接続先は、管理画面から確認してください。</small></li>
 </ul>
 
+---
+
 ### ■連動サンプル（連動フローの番号と連動します。）
 
-② LINK型「FORM」要求
+### ② LINK型「FORM」要求
 ```json
 ## Header
 Authorization: 統合決済APIのアクセストークン
 Content-Type: コンテンツタイプ
 PayRoad-Api-Version: APIバージョン
 PayRoad-Payment-Method: 決済手段コード
-PayRoad-Pg-Name: 決済代行会社コード
 
 ## Body(Json)
 {
@@ -79,7 +80,7 @@ PayRoad-Pg-Name: 決済代行会社コード
   "testFlag": "0"
 }
 ```
-⑤ LINK型「FORM」返却
+### ⑤ LINK型「FORM」返却
 ```markdown
 返却値（JSON）
 {
@@ -124,28 +125,102 @@ PayRoad-Pg-Name: 決済代行会社コード
   "resultMessage": "string"
 }
 ```
-⑭ リダイレクト
+### ⑩ 決済結果
+```json
+## LINK型「FORM」要求時に設定したURL（serviceNotifyUrl）に通知されます。
+{
+  "isSuccessful": true,
+  "resultCode": "PAY-COMMON-0000",
+  "resultInfo": {
+    "amount": "string",
+    "completedDate": "2020-08-15 08:15:00",
+    "currency": "JPY",
+    "orderId": "string",
+    "region": "JP",
+    "serviceOrderId": "string"
+  },
+  "resultMessage": "string"
+}
+
+```
+### ⑭ リダイレクト
 ```text
-LINK型「FORM」要求時に設定した（returnUrl）にリダイレクト
+LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクトされます。
 ```
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-  <script type="text/javascript" src="{{ '/assets/js/vendor/imgViewer2.js' | relative_url }}"></script>
-  <!-- <script src="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.js"></script> -->
-  <!-- <script type="text/javascript" src="{{ '/assets/js/vendor/leaflet-beautify-marker-icon.js' | relative_url }}"></script> -->
+<script type="text/javascript" src="{{ '/assets/js/vendor/imgViewer2.js' | relative_url }}"></script>
+<script src="https://unpkg.com/leaflet-responsive-popup@0.2.0/leaflet.responsive.popup.js"></script>
+<script type="text/javascript" src="{{ '/assets/js/vendor/leaflet-beautify-marker-icon.js' | relative_url }}"></script>
   
+<!-- <script type="text/javascript">
+  (function($) {
+    $(window).on("load", function() {
+      var $img = $("#image_screen").imgViewer2(
+        {
+          onReady: function() {
+            this.setZoom(2);
+            this.setZoom(1);
+          }
+        }
+      );
+    });
+  })(jQuery);
+</script> -->
 <script type="text/javascript">
-(function($) {
-	$(window).on("load", function() {
-		var $img = $("#image_screen").imgViewer2(
-			{
-				onReady: function() {
-					this.setZoom(2);
-					this.setZoom(1);
-				}
-			}
-		);
-	});
-})(jQuery);
+  (function($) {
+    $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
+      options: {
+  /*
+  *	Defaault action for addNote callback
+  */
+        addNote: function(data) {
+          var map = this.map,
+            loc = this.relposToLatLng(data.x, data.y);
+          var popup = L.responsivePopup({ hasTip: true, autoPan: false}).setContent(data.note);
+          var icon = L.BeautifyIcon.icon({icon: 'question',
+                          borderColor: '#f7d12e',
+                          textColor: '#2869e6',
+                          backgroundColor: 'transparent'
+          });
+          L.marker(loc, {icon: icon}).addTo(map).bindPopup(popup);
+        }
+        
+      },
+      
+  /*
+  *	Add notes from a javascript array
+  */
+      import: function(notes) {
+        if (this.ready) {
+          var self = this;
+          $.each(notes, function() {
+            self.options.addNote.call(self, this);
+          });	
+        }
+      }
+    });
+    $(document).ready( function() {
+      var $img = $("#image_screen").imgNotes2( {
+              onReady: function() {
+                var notes = [	
+                        {x: "0.737", y:"0.042", note: '\
+                        <a href="#-link型form要求">サンプル確認</a> '
+                        },
+                        {x: "0.737", y:"0.112", note: '\
+                        <a href="#-link型form返却">サンプル確認</a> '
+                        },
+                        {x: "0.700", y:"0.655", note: '\
+                        <a href="#-決済結果">サンプル確認</a> '
+                        },
+                        {x: "0.212", y:"0.797", note: '\
+                        <a href="#-リダイレクト">サンプル確認</a> '
+                        },
+                        ];
+                this.import(notes);
+              }
+      });
+    });
+  })(jQuery);
 </script>
