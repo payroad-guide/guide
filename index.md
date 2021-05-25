@@ -180,7 +180,7 @@ LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクト
             loc = this.relposToLatLng(data.x, data.y);
           var popup = L.responsivePopup({ hasTip: true, autoPan: false}).setContent(data.note);
           var icon = L.BeautifyIcon.icon({icon: 'question',
-                          borderColor: '#f7d12e',
+                          borderColor: '#e94c4c',
                           textColor: '#2869e6',
                           backgroundColor: 'transparent'
           });
