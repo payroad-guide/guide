@@ -1,0 +1,49 @@
+{%- if site.footer_content -%}
+  <p class="text-small text-grey-dk-100 mb-0">{{ site.footer_content }}</p>
+  <script type="text/javascript">
+    (function($) {
+      $.widget("wgm.imgNotes2", $.wgm.imgViewer2, {
+        options: {
+    
+          addNote: function(data) {
+            var map = this.map,
+              loc = this.relposToLatLng(data.x, data.y);
+            var popup = L.responsivePopup({ hasTip: true, autoPan: false}).setContent(data.note);
+            var icon = L.BeautifyIcon.icon({icon: 'arrow-down',
+                            borderColor: '#FFF607',
+                            textColor: '#FFF607',
+                            backgroundColor: 'transparent'
+            });
+            
+            L.marker(loc, {icon: icon}).addTo(map).bindPopup(popup);
+          }
+          
+        },
+        
+        import: function(notes) {
+          if (this.ready) {
+            var self = this;
+            $.each(notes, function() {
+              self.options.addNote.call(self, this);
+            });	
+          }
+        }
+      });
+      $(document).ready( function() {
+        var $img = $("#image1").imgNotes2( {
+                onReady: function() {
+                  var notes = [	{x: "0.5", y:"0.5", note:"AFL Grand Final Trophy"}, 
+                          {x: "0.322", y:"0.269", note: '\
+                          <center><b>Brisbane Lions Flag</b><br/>\
+                          <img src="http://www.lions.com.au/static-resources/themes/brisbane/images/logo-brisbane.png"/></center>\
+                          <a href="http://www.lions.com.au/" target="blank">The Brisbane Lions</a> \
+                          is an <a href="http://en.wikipedia.org/wiki/Australian_rules_football" target="blank">Australian rules football club.</a>'
+                          },
+                          {x: "0.824", y: "0.593", note: "Fluffy microphone"}];
+                  this.import(notes);
+                }
+        });
+      });
+    })(jQuery);
+    </script>
+{%- endif -%}
