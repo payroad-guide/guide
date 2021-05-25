@@ -206,15 +206,19 @@ LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクト
               onReady: function() {
                 var notes = [	
                         {x: "0.737", y:"0.045", note: '\
+                        POST（Body：JSON）要求<br>\
                         <a href="#-link型form要求">サンプル確認</a> '
                         },
                         {x: "0.737", y:"0.115", note: '\
+                        返却値はJSONで「formTag」から生成FORMを取得可能<br>\
                         <a href="#-link型form返却">サンプル確認</a> '
                         },
                         {x: "0.700", y:"0.655", note: '\
+                        LINK型「FORM」要求時に設定したURL(serviceNotifyUrl)に通知されます。<br>\
                         <a href="#-決済結果">サンプル確認</a> '
                         },
                         {x: "0.215", y:"0.793", note: '\
+                        LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクトされます。例えば、購入完了画面へリダイレクト<br>\
                         <a href="#-リダイレクト">サンプル確認</a> '
                         },
                         ];
