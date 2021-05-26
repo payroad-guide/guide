@@ -15,7 +15,7 @@ permalink: /
 
 ### ■連動フロー
 ＜図の「?」アイコンをクリックし、情報確認が可能＞
-<img src="{{ site.baseurl }}/assets/images/link_flow.png" id="image_screen" width="90%">
+<img src="{{ site.baseurl }}/assets/images/link_flow.png" id="image_screen" width="80%">
 
 1. FROMの基本構造
 
@@ -143,7 +143,7 @@ PayRoad-Payment-Method: 決済手段コード
 }
 
 ```
-### ⑪ リダイレクト
+### ⑬ リダイレクト
 ```text
 LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクトされます。
 ```
@@ -205,19 +205,19 @@ LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクト
       var $img = $("#image_screen").imgNotes2( {
               onReady: function() {
                 var notes = [	
-                        {x: "0.737", y:"0.044", note: '\
+                        {x: "0.770", y:"0.040", note: '\
                         POST（Body：JSON）要求<br>\
                         <a href="#-link型form要求">サンプル確認</a> '
                         },
-                        {x: "0.737", y:"0.114", note: '\
+                        {x: "0.770", y:"0.110", note: '\
                         返却値はJSONで「formTag」から生成FORMを取得可能<br>\
                         <a href="#-link型form返却">サンプル確認</a> '
                         },
-                        {x: "0.700", y:"0.656", note: '\
+                        {x: "0.730", y:"0.650", note: '\
                         LINK型「FORM」要求時に設定したURL(serviceNotifyUrl)に通知されます。<br>\
                         <a href="#-決済結果">サンプル確認</a> '
                         },
-                        {x: "0.215", y:"0.795", note: '\
+                        {x: "0.225", y:"0.790", note: '\
                         LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクトされます。例えば、購入完了画面へリダイレクト<br>\
                         <a href="#-リダイレクト">サンプル確認</a> '
                         },
