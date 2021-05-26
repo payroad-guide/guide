@@ -80,7 +80,7 @@ PayRoad-Payment-Method: 決済手段コード
   "testFlag": "0"
 }
 ```
-### ⑤ LINK型「FORM」返却
+### ③ LINK型「FORM」返却
 ```markdown
 返却値（JSON）
 {
@@ -125,7 +125,7 @@ PayRoad-Payment-Method: 決済手段コード
   "resultMessage": "string"
 }
 ```
-### ⑩ 決済結果
+### ⑧ 決済結果
 ```json
 ## LINK型「FORM」要求時に設定したURL（serviceNotifyUrl）に通知されます。
 {
@@ -143,7 +143,7 @@ PayRoad-Payment-Method: 決済手段コード
 }
 
 ```
-### ⑭ リダイレクト
+### ⑪ リダイレクト
 ```text
 LINK型「FORM」要求時に設定したURL（returnUrl）にリダイレクトされます。
 ```
